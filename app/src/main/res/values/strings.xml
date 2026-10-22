@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name_release" translatable="false" tools:ignore="UnusedResources">Jellyfin</string>
-    <string name="app_name_debug" translatable="false" tools:ignore="UnusedResources">Jellyfin Debug</string>
+    <string name="app_name_release" translatable="false" tools:ignore="UnusedResources">DauFin</string>
+    <string name="app_name_debug" translatable="false" tools:ignore="UnusedResources">DauFin</string>
     <string name="video_error_unknown_error">Failed to load video</string>
     <string name="loading">Loading…</string>
     <string name="btn_cancel">Cancel</string>
@@ -81,7 +81,7 @@
     <string name="lbl_bracket_unknown">Unknown</string>
     <string name="lbl_trailer">"Trailer "</string>
     <string name="lbl_play_trailers">Play trailer(s)</string>
-    <string name="lbl_lights_off">Lights off</string>
+    <string name="lbl_lights_off">Lights</string>
     <string name="msg_lights_off_sent">Lights off command sent</string>
     <string name="msg_lights_off_failed">Could not reach Home Assistant</string>
     <string name="msg_lights_off_not_configured">Home Assistant is not configured (ha.webhook.url)</string>
