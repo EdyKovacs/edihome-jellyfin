@@ -31,7 +31,7 @@ object HomeAssistant {
 	@JvmStatic
 	fun turnOffLights(context: Context) {
 		if (!isConfigured()) {
-			Utils.showToast(context, R.string.msg_lights_off_not_configured)
+			Utils.showToast(context, context.getString(R.string.msg_lights_off_not_configured))
 			return
 		}
 
@@ -43,7 +43,9 @@ object HomeAssistant {
 			withContext(Dispatchers.Main) {
 				Utils.showToast(
 					appContext,
-					if (success) R.string.msg_lights_off_sent else R.string.msg_lights_off_failed
+					appContext.getString(
+						if (success) R.string.msg_lights_off_sent else R.string.msg_lights_off_failed
+					)
 				)
 			}
 		}
