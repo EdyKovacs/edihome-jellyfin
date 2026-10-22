@@ -17,6 +17,11 @@ android {
 		applicationId = namespace
 		versionName = project.getVersionName()
 		versionCode = getVersionCode(versionName!!)
+
+		// Home Assistant webhook used by the "lights off" button on the item details screen.
+		// Configure in gradle.properties (or with -P on the command line), see gradle.properties for the keys.
+		buildConfigField("String", "HA_WEBHOOK_URL", "\"${project.findProperty("ha.webhook.url") ?: ""}\"")
+		buildConfigField("String", "HA_TOKEN", "\"${project.findProperty("ha.token") ?: ""}\"")
 	}
 
 	buildFeatures {

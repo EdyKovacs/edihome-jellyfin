@@ -70,6 +70,7 @@ import org.jellyfin.androidtv.ui.presentation.MyDetailsOverviewRowPresenter;
 import org.jellyfin.androidtv.util.CoroutineUtils;
 import org.jellyfin.androidtv.util.DateTimeExtensionsKt;
 import org.jellyfin.androidtv.util.ImageHelper;
+import org.jellyfin.androidtv.util.HomeAssistant;
 import org.jellyfin.androidtv.util.KeyProcessor;
 import org.jellyfin.androidtv.util.MarkdownRenderer;
 import org.jellyfin.androidtv.util.PlaybackHelper;
@@ -762,6 +763,7 @@ public class FullDetailsFragment extends Fragment implements RecordingIndicatorV
     TextUnderButton moreButton;
     TextUnderButton playButton = null;
     TextUnderButton trailerButton = null;
+    TextUnderButton lightsButton = null;
 
     private void addButtons(int buttonSize) {
         BaseItemDto baseItem = mBaseItem;
@@ -794,6 +796,22 @@ public class FullDetailsFragment extends Fragment implements RecordingIndicatorV
                 }
             });
             mDetailsOverviewRow.addAction(playButton);
+
+            // Custom: turn the lights off via Home Assistant before starting a movie or episode.
+            // Hidden entirely when no webhook URL was configured at build time.
+            if (HomeAssistant.isConfigured() && (
+                    baseItem.getType() == BaseItemKind.MOVIE
+                            || baseItem.getType() == BaseItemKind.EPISODE
+                            || baseItem.getType() == BaseItemKind.SERIES
+                            || baseItem.getType() == BaseItemKind.VIDEO)) {
+                lightsButton = TextUnderButton.create(requireContext(), R.drawable.ic_lightbulb, buttonSize, 0, getString(R.string.lbl_lights_off), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        HomeAssistant.turnOffLights(requireContext());
+                    }
+                });
+                mDetailsOverviewRow.addAction(lightsButton);
+            }
 
             if (isSeries && !isStarted) {
                 FullDetailsFragmentHelperKt.getNextUpEpisode(this, nextUpEpisode -> {
@@ -1125,6 +1143,8 @@ public class FullDetailsFragment extends Fragment implements RecordingIndicatorV
 
         List<TextUnderButton> actionsList = new ArrayList<>();
         // added in order of priority (should match res/menu/menu_details_more.xml)
+        // the list is reversed below, so actions added first are the last ones to be hidden
+        if (lightsButton != null) actionsList.add(lightsButton);
         if (queueButton != null) actionsList.add(queueButton);
         if (trailerButton != null) actionsList.add(trailerButton);
         if (shuffleButton != null) actionsList.add(shuffleButton);

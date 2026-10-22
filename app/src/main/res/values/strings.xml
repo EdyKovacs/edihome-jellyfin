@@ -81,6 +81,10 @@
     <string name="lbl_bracket_unknown">Unknown</string>
     <string name="lbl_trailer">"Trailer "</string>
     <string name="lbl_play_trailers">Play trailer(s)</string>
+    <string name="lbl_lights_off">Lights off</string>
+    <string name="msg_lights_off_sent">Lights off command sent</string>
+    <string name="msg_lights_off_failed">Could not reach Home Assistant</string>
+    <string name="msg_lights_off_not_configured">Home Assistant is not configured (ha.webhook.url)</string>
     <string name="lbl_no">No</string>
     <string name="lbl_yes">Yes</string>
     <string name="lbl_enter_server_address">Enter server address</string>
